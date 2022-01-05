@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Home</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!--jquery-->
+    <script src="https://code.jquery.com/jquery-3.6.0.js"
+            integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container mt-3">
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label>Quantity</label>
+            <input type="number" class="form-control" id="quantity" placeholder="Enter quantity">
+        </div>
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" class="form-control" id="price" placeholder="Enter price">
+        </div>
+        <button onclick="return _Add();" class="btn btn-primary">Submit</button>
+        <a class="btn btn-success" href="/index">Back to list</a>
+</div>
+<script type="text/javascript">
+
+    function _Add(){
+        let productObj = {
+            name: $('#name').val(),
+            price: $('#price').val(),
+            quantity: $('#quantity').val()
+        }
+        $.ajax({
+            url: "/api/product",
+            contentType: "application/json;charset=utf-8",
+            data: JSON.stringify(productObj),
+            type: "POST",
+            dataType: "json",
+            success: function (data) {
+                alert("Add Successfully !");
+            },
+            error: function (errormessage) {
+                alert("Add Unsuccessfully !");
+            }
+        });
+    }
+
+</script>
+</body>
+
+</html>
